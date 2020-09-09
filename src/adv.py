@@ -1,25 +1,34 @@
 from room import Room
 from player import Player
-
+from item import Item
 # Declare all the rooms
 
+sword = Item("sword", "this will be used to kill the oncoming passengers")
+coins = Item("coins", "this will ge used to help you buy more ammo")
+flashlight = Item("flaghlight", "this will help you see in the dark")
+monsters = Item("monsters", "this will help you be entertained")
+coffee_beans = Item("coffee beans", "this will help you be productive")
+rainbows = Item("rainbows", "this will help you attract unicorns")
+unicorns = Item("unicorns", "this will help you become a billionaire")
+
+
 room = {
-    'outside':  Room("Outside Cave Entrance",
+    'outside':  Room(" Cave OutsideEntrance",
                      "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", [sword, coins]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", [flashlight, monsters]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", [coffee_beans, rainbows]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", [unicorns]),
 }
 
 
@@ -62,6 +71,10 @@ command = None
 while True:
     print(player.room.name)
     print(player.room.description)
+    print("items:") 
+    for item in player.room.items:
+        print(f"{item.name}: {item.description}")
+
     command = input("Enter n,s,e,w: ")
     if command == "q":
         exit()
